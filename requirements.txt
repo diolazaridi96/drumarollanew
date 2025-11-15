@@ -1,9 +1,9 @@
-# ---- requirements.txt ----
-# Minimal, CPU-friendly set for UVR5 + onset detection
-uvr5
+# requirements.txt
+torch
 onnxruntime
 numpy
 soundfile
 librosa
 scipy
 flask
+git+https://github.com/Anjok07/ultimatevocalremovergui.git@master#egg=uvr5
