@@ -1,0 +1,9 @@
+# ---- requirements.txt ----
+# Minimal, CPU-friendly set for UVR5 + onset detection
+uvr5
+onnxruntime
+numpy
+soundfile
+librosa
+scipy
+flask
