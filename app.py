@@ -5,17 +5,19 @@ import soundfile as sf
 import os
 from download_model import download_model_if_missing
 
+# --- download model at runtime ---
 download_model_if_missing()
-
-app = Flask(__name__)
 
 MODEL_PATH = "model/drums.pt"
 device = "cpu"
 
+# --- load PyTorch model ---
 print("Loading model...")
 model = torch.load(MODEL_PATH, map_location=device)
 model.eval()
 print("Model loaded.")
+
+app = Flask(__name__)
 
 UPLOAD_DIR = "uploads"
 OUTPUT_DIR = "outputs"
@@ -39,18 +41,17 @@ def separate():
 
     file.save(input_path)
 
-    # ---- Load audio ----
+    # Load audio
     wav, sr = torchaudio.load(input_path)
-    wav = wav.mean(dim=0, keepdim=True)  # convert to mono
-    wav = wav.to(device)
+    wav = wav.mean(dim=0, keepdim=True).to(device)  # convert to mono
 
-    # ---- Infer ----
+    # Inference
     with torch.no_grad():
         drums = model(wav)
 
     drums = drums.cpu().numpy().squeeze()
 
-    # ---- Write output ----
+    # Save output
     sf.write(output_path, drums, sr)
 
     return send_file(output_path, as_attachment=True)
@@ -59,3 +60,4 @@ def separate():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
+
