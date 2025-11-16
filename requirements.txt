@@ -1,6 +1,4 @@
 flask==2.2.5
-torch==2.1.0
-torchaudio==2.1.0
 numpy==1.26.4
 soundfile==0.12.1
 requests==2.31.0
