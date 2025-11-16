@@ -3,6 +3,9 @@ import torch
 import torchaudio
 import soundfile as sf
 import os
+from download_model import download_model_if_missing
+
+download_model_if_missing()
 
 app = Flask(__name__)
 
