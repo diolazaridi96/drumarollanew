@@ -1,1 +1,16 @@
 
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Drum Splitter</title>
+</head>
+<body>
+    <h2>Загрузите аудио → получите только барабаны</h2>
+
+    <form action="/separate" method="post" enctype="multipart/form-data">
+        <input type="file" name="audio" accept="audio/*" required>
+        <button type="submit">Извлечь ударные</button>
+    </form>
+</body>
+</html>
